@@ -1,13 +1,21 @@
 import arenal from "./assets/arenal.JPG";
 import bsn from "./assets/bsn.jpeg";
 import cafe from "./assets/cafe.JPG";
+import crimlogo from "./assets/crimlogo.png";
 import db from "./assets/db.jpg";
+import desktop from "./assets/desktop.png";
 import ghungroo from "./assets/ghungroo.JPG";
+import jeux from "./assets/jeux.png";
 import julia from "./assets/julia.jpeg";
 import lucky from "./assets/lucky.jpeg";
+import merch from "./assets/merch.png";
+import noexitWide from "./assets/noexit_wide.png";
 import orange from "./assets/orange.png";
+import shosty from "./assets/shosty.png";
+import square4x100 from "./assets/square@4x-100 1.png";
 import tree from "./assets/tree.jpeg";
 import youthteam from "./assets/youthteam.JPEG";
+
 
 // ─── Shared style tokens ────────────────────────────────────────────────────
 const fontXanh: React.CSSProperties = {
@@ -151,7 +159,7 @@ function Sidebar() {
             }}
           >
             <div style={{ position: "relative", flexShrink: 0, width: "105px", height: "105px" }}>
-              <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={julia} />
+              <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
             </div>
             <p
               style={{
@@ -394,10 +402,10 @@ function CrimsonImages() {
   return (
     <>
       <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={bsn} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={desktop} />
       </div>
       <div style={{ gridColumn: 4, gridRow: 2, alignSelf: "stretch", flexShrink: 0, position: "relative", width: "113.6px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={db} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={crimlogo} />
       </div>
     </>
   );
@@ -409,17 +417,17 @@ function BandImages() {
     <>
       <div style={{ gridColumn: 5, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "124.22%", left: "-30.99%", top: "-24.37%", width: "162%", maxWidth: "none" }} src={youthteam} />
+          <img alt="" style={{ position: "absolute", height: "124.22%", left: "-30.99%", top: "-24.37%", width: "162%", maxWidth: "none" }} src={lucky} />
         </div>
       </div>
       <div style={{ gridColumn: 3, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "221.62%", left: "-56.73%", top: "-110.66%", width: "288.73%", maxWidth: "none" }} src={tree} />
+          <img alt="" style={{ position: "absolute", height: "221.62%", left: "-56.73%", top: "-110.66%", width: "288.73%", maxWidth: "none" }} src={julia} />
         </div>
       </div>
       <div style={{ gridColumn: 1, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "155.7%", left: "-51.8%", top: "-21.95%", width: "203.51%", maxWidth: "none" }} src={ghungroo} />
+          <img alt="" style={{ position: "absolute", height: "155.7%", left: "-51.8%", top: "-21.95%", width: "203.51%", maxWidth: "none" }} src={tree} />
         </div>
       </div>
     </>
@@ -431,35 +439,18 @@ function OrchestraImages() {
   return (
     <>
       <div style={{ gridColumn: 4, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={lucky} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={merch} />
       </div>
       <div style={{ gridColumn: 2, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "311.15%", left: "-121.82%", top: "-55.89%", width: "498.72%", maxWidth: "none" }} src={bsn} />
+          <img alt="" style={{ position: "absolute", height: "311.15%", left: "-121.82%", top: "-55.89%", width: "498.72%", maxWidth: "none" }} src={jeux} />
         </div>
       </div>
       <div style={{ gridColumn: 5, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={tree} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={shosty} />
       </div>
     </>
   );
-}
-
-// ─── Project 4: Lowell House Opera ──────────────────────────────────────────
-function OperaImages() {
-  return (
-    <>
-      <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "102.34%", left: 0, top: "-1.17%", width: "100%", maxWidth: "none" }} src={cafe} />
-        </div>
-      </div>
-      <div style={{ gridColumn: "4 / span 2", gridRow: 2, justifySelf: "stretch", position: "relative", flexShrink: 0, aspectRatio: "1176/401" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
-      </div>
-    </>
-  );
-}
 
 // ─── Root export ─────────────────────────────────────────────────────────────
 export default function App() {
