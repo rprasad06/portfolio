@@ -79,7 +79,7 @@ function PhotoCollage() {
     >
       {/* col-1 row-1 */}
       <div style={{ gridColumn: 1, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={julia} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
       </div>
       {/* col-3 row-3 */}
       <div style={{ gridColumn: 3, gridRow: 3, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
@@ -89,14 +89,14 @@ function PhotoCollage() {
       </div>
       {/* col-5 row-4 */}
       <div style={{ gridColumn: 5, gridRow: 4, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={db} />
       </div>
       {/* absolute floaters */}
       <div style={{ position: "absolute", left: "49px", width: "111.2px", height: "111.2px", top: "485px" }}>
         <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={cafe} />
       </div>
       <div style={{ position: "absolute", left: "392px", width: "111.2px", height: "111.2px", top: "34px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={lucky} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={bsn} />
       </div>
     </div>
   );
@@ -451,6 +451,23 @@ function OrchestraImages() {
       </div>
     </>
   );
+}
+
+// ─── Project 4: Lowell House Opera ──────────────────────────────────────────
+function OperaImages() {
+  return (
+    <>
+      <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
+        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
+          <img alt="" style={{ position: "absolute", height: "102.34%", left: 0, top: "-1.17%", width: "100%", maxWidth: "none" }} src={square4x100} />
+        </div>
+      </div>
+      <div style={{ gridColumn: "4 / span 2", gridRow: 2, justifySelf: "stretch", position: "relative", flexShrink: 0, aspectRatio: "1176/401" }}>
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={noexitWide} />
+      </div>
+    </>
+  );
+}
 
 // ─── Root export ─────────────────────────────────────────────────────────────
 export default function App() {
