@@ -14,7 +14,7 @@ import orange from "./assets/orange.png";
 import shosty from "./assets/shosty.png";
 import square4x100 from "./assets/square@4x-100 1.png";
 import tree from "./assets/tree.jpeg";
-import youthteam from "./assets/youthteam.JPEG";
+// import youthteam from "./assets/youthteam.JPEG";
 
 
 // ─── Shared style tokens ────────────────────────────────────────────────────
