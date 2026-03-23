@@ -1,19 +1,13 @@
-import imgImg09001 from "./assets/3a5b82a9a4623f949a98665e8068e7b101e4f357.png";
-import imgImg09441 from "./assets/cd38d1506cf9080758add7ab485d3118e99afd43.png";
-import imgImg66782 from "./assets/016d1a2c97dc00d2cadf1f61a49cf9fc3b046e93.png";
-import img20260218 from "./assets/b6dec957130867f5f642ae6002b148b194a4a72f.png";
-import imgImg05591 from "./assets/ac3d04d91a7bcb425595120936cc6f0852f94760.png";
-import imgAsset24X1 from "./assets/3984dc973dfec0764e39fa59ed686e37ec783136.png";
-import imgCrimsonDesktopMockup1 from "./assets/1ca9bbe1257e5c4758df6001f5f2bdf9bbff2b07.png";
-import imgCrimlogo1 from "./assets/e4f43bd231303a90ceecf24d24cfce08fcca3d61.png";
-import imgDsc053451 from "./assets/3086412a4e5015fde31e692a4a38c59368db8514.png";
-import imgImg62311 from "./assets/1c1a933a19931e26b6407e02f326cc24c5b0c7f3.png";
-import imgDsc039831 from "./assets/9873ce9c130f897dcaedcd4e216ca67649780c65.png";
-import imgInstagram4X1 from "./assets/842cd586b5ee6b8e227f271480f865baf9c046d4.png";
-import imgMerchSubmissionV41 from "./assets/51cd615fc03b460b8af0e90e8f5c4816a5d81d3d.png";
-import imgInstagram4X2 from "./assets/d4c354419d3c27bfa698218c31326f7abc980679.png";
-import imgSquare4X1001 from "./assets/4e00ccddd301b32c0b7f2385bf41252ecea30474.png";
-import img1175X4001001 from "./assets/ee2cc1fb40f8d19f94766c2c214a8c2b1c5eb479.png";
+import arenal from "./assets/arenal.JPG";
+import bsn from "./assets/bsn.jpeg";
+import cafe from "./assets/cafe.JPG";
+import db from "./assets/db.jpg";
+import ghungroo from "./assets/ghungroo.JPG";
+import julia from "./assets/julia.jpeg";
+import lucky from "./assets/lucky.jpeg";
+import orange from "./assets/orange.png";
+import tree from "./assets/tree.jpeg";
+import youthteam from "./assets/youthteam.JPEG";
 
 // ─── Shared style tokens ────────────────────────────────────────────────────
 const fontXanh: React.CSSProperties = {
@@ -77,24 +71,24 @@ function PhotoCollage() {
     >
       {/* col-1 row-1 */}
       <div style={{ gridColumn: 1, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgImg09001} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={julia} />
       </div>
       {/* col-3 row-3 */}
       <div style={{ gridColumn: 3, gridRow: 3, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "249.07%", left: "-49.13%", top: "-44.37%", width: "149.3%", maxWidth: "none" }} src={imgImg09441} />
+          <img alt="" style={{ position: "absolute", height: "249.07%", left: "-49.13%", top: "-44.37%", width: "149.3%", maxWidth: "none" }} src={ghungroo} />
         </div>
       </div>
       {/* col-5 row-4 */}
       <div style={{ gridColumn: 5, gridRow: 4, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgImg66782} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
       </div>
       {/* absolute floaters */}
       <div style={{ position: "absolute", left: "49px", width: "111.2px", height: "111.2px", top: "485px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={img20260218} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={cafe} />
       </div>
       <div style={{ position: "absolute", left: "392px", width: "111.2px", height: "111.2px", top: "34px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgImg05591} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={lucky} />
       </div>
     </div>
   );
@@ -157,7 +151,7 @@ function Sidebar() {
             }}
           >
             <div style={{ position: "relative", flexShrink: 0, width: "105px", height: "105px" }}>
-              <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgImg09001} />
+              <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={julia} />
             </div>
             <p
               style={{
@@ -400,10 +394,10 @@ function CrimsonImages() {
   return (
     <>
       <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgCrimsonDesktopMockup1} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={bsn} />
       </div>
       <div style={{ gridColumn: 4, gridRow: 2, alignSelf: "stretch", flexShrink: 0, position: "relative", width: "113.6px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgCrimlogo1} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={db} />
       </div>
     </>
   );
@@ -415,17 +409,17 @@ function BandImages() {
     <>
       <div style={{ gridColumn: 5, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "124.22%", left: "-30.99%", top: "-24.37%", width: "162%", maxWidth: "none" }} src={imgDsc053451} />
+          <img alt="" style={{ position: "absolute", height: "124.22%", left: "-30.99%", top: "-24.37%", width: "162%", maxWidth: "none" }} src={youthteam} />
         </div>
       </div>
       <div style={{ gridColumn: 3, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "221.62%", left: "-56.73%", top: "-110.66%", width: "288.73%", maxWidth: "none" }} src={imgImg62311} />
+          <img alt="" style={{ position: "absolute", height: "221.62%", left: "-56.73%", top: "-110.66%", width: "288.73%", maxWidth: "none" }} src={tree} />
         </div>
       </div>
       <div style={{ gridColumn: 1, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "155.7%", left: "-51.8%", top: "-21.95%", width: "203.51%", maxWidth: "none" }} src={imgDsc039831} />
+          <img alt="" style={{ position: "absolute", height: "155.7%", left: "-51.8%", top: "-21.95%", width: "203.51%", maxWidth: "none" }} src={ghungroo} />
         </div>
       </div>
     </>
@@ -437,15 +431,15 @@ function OrchestraImages() {
   return (
     <>
       <div style={{ gridColumn: 4, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgInstagram4X1} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={lucky} />
       </div>
       <div style={{ gridColumn: 2, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "311.15%", left: "-121.82%", top: "-55.89%", width: "498.72%", maxWidth: "none" }} src={imgMerchSubmissionV41} />
+          <img alt="" style={{ position: "absolute", height: "311.15%", left: "-121.82%", top: "-55.89%", width: "498.72%", maxWidth: "none" }} src={bsn} />
         </div>
       </div>
       <div style={{ gridColumn: 5, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgInstagram4X2} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={tree} />
       </div>
     </>
   );
@@ -457,11 +451,11 @@ function OperaImages() {
     <>
       <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
         <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "102.34%", left: 0, top: "-1.17%", width: "100%", maxWidth: "none" }} src={imgSquare4X1001} />
+          <img alt="" style={{ position: "absolute", height: "102.34%", left: 0, top: "-1.17%", width: "100%", maxWidth: "none" }} src={cafe} />
         </div>
       </div>
       <div style={{ gridColumn: "4 / span 2", gridRow: 2, justifySelf: "stretch", position: "relative", flexShrink: 0, aspectRatio: "1176/401" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={img1175X4001001} />
+        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
       </div>
     </>
   );
@@ -505,7 +499,7 @@ export default function App() {
       >
         <div style={{ flexShrink: 0, transform: "rotate(-146.53deg)" }}>
           <div style={{ height: "1136.812px", position: "relative", width: "1624.131px" }}>
-            <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={imgAsset24X1} />
+            <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={orange} />
           </div>
         </div>
       </div>
