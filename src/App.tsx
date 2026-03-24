@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import type { CSSProperties, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
 import arenal from "./assets/arenal.JPG";
 import bsn from "./assets/bsn.jpeg";
@@ -18,68 +19,10 @@ import shosty from "./assets/shosty.png";
 import square4x100 from "./assets/square@4x-100 1.png";
 import tree from "./assets/tree.jpeg";
 import * as styles from "./App.styles";
+import { PhotoFrame } from "./components/PhotoFrame";
+import { useSectionNavContext } from "./contexts/SectionNavContext";
+import type { PhotoKey } from "./components/PhotoFrame";
 import type { SectionNavItem } from "./sectionNavigation";
-import { useSectionNavigation } from "./sectionNavigation";
-
-type PhotoKey =
-  | "arenal"
-  | "ghungroo"
-  | "db"
-  | "cafe"
-  | "bsn"
-  | "desktop"
-  | "crimlogo"
-  | "lucky"
-  | "julia"
-  | "tree"
-  | "merch"
-  | "jeux"
-  | "shosty"
-  | "square4x100"
-  | "noexitWide"
-  | "orange";
-
-const PHOTO_FRAME_PRESETS: Record<PhotoKey, { zoom: number; x: number; y: number }> = {
-  arenal: { zoom: 1, x: 0, y: 0 },
-  ghungroo: { zoom: 1, x: 0, y: 0 },
-  db: { zoom: 1.8, x: -20, y: 40 },
-  cafe: { zoom: 1, x: 0, y: 0 },
-  bsn: { zoom: 1, x: 0, y: 0 },
-  desktop: { zoom: 1, x: 0, y: 0 },
-  crimlogo: { zoom: 1, x: 0, y: 0 },
-  lucky: { zoom: 1, x: 0, y: 0 },
-  julia: { zoom: 2, x: 0, y: 0 },
-  tree: { zoom: 1.5, x: 30, y: -40 },
-  merch: { zoom: 1, x: 0, y: 0 },
-  jeux: { zoom: 1, x: 0, y: 0 },
-  shosty: { zoom: 1, x: 0, y: 0 },
-  square4x100: { zoom: 1, x: 0, y: 0 },
-  noexitWide: { zoom: 1, x: 0, y: 0 },
-  orange: { zoom: 1, x: 0, y: 0 },
-};
-
-function photoStyle(key: PhotoKey): CSSProperties {
-  const preset = PHOTO_FRAME_PRESETS[key];
-  return {
-    position: "absolute",
-    inset: 0,
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-    objectFit: "cover",
-    objectPosition: "50% 50%",
-    transform: `translate(${preset.x}px, ${preset.y}px) scale(${preset.zoom})`,
-    transformOrigin: "center",
-  };
-}
-
-function PhotoFrame({ photoId, src }: { photoId: PhotoKey; src: string }) {
-  return (
-    <div style={styles.photoFrameContainer}>
-      <img alt="" style={photoStyle(photoId)} src={src} />
-    </div>
-  );
-}
 
 function Divider({ width = 395 }: { width?: number }) {
   return (
@@ -115,6 +58,7 @@ interface ProjectConfig {
   id: string;
   sidebarLabel: string;
   zIndex: number;
+  hasProjectPage: boolean;
   title: ReactNode;
   subtitle: string;
   dates: ReactNode;
@@ -136,9 +80,12 @@ const PROJECTS: ProjectConfig[] = [
     id: "harvard-crimson",
     sidebarLabel: "The Harvard Crimson",
     zIndex: 8,
+    hasProjectPage: true,
     title: (
       <p style={{ margin: 0 }}>
-        <span style={{ textDecoration: "underline" }}>The Harvard Crimson: UI/UX</span>
+        <Link to="/projects/harvard-crimson" style={{ color: "inherit", textDecoration: "underline" }}>
+          The Harvard Crimson: UI/UX
+        </Link>
         {" \u2192"}
       </p>
     ),
@@ -158,11 +105,18 @@ const PROJECTS: ProjectConfig[] = [
     id: "band-with-no-name",
     sidebarLabel: "The Band with No Name",
     zIndex: 6,
+    hasProjectPage: true,
     title: (
       <div>
-        <p style={{ margin: 0, textDecoration: "underline" }}>The Band with No Name; Brand</p>
         <p style={{ margin: 0 }}>
-          <span style={{ textDecoration: "underline" }}>Design</span>
+          <Link to="/projects/band-with-no-name" style={{ color: "inherit", textDecoration: "underline" }}>
+            The Band with No Name; Brand
+          </Link>
+        </p>
+        <p style={{ margin: 0 }}>
+          <Link to="/projects/band-with-no-name" style={{ color: "inherit", textDecoration: "underline" }}>
+            Design
+          </Link>
           {" \u2192"}
         </p>
       </div>
@@ -179,11 +133,18 @@ const PROJECTS: ProjectConfig[] = [
     id: "harvard-radcliffe-orchestra",
     sidebarLabel: "Harvard-Radcliffe Orchestra",
     zIndex: 4,
+    hasProjectPage: true,
     title: (
       <div>
-        <p style={{ margin: 0, textDecoration: "underline" }}>Harvard-Radcliffe</p>
         <p style={{ margin: 0 }}>
-          <span style={{ textDecoration: "underline" }}>Orchestra: Graphic Design</span>
+          <Link to="/projects/harvard-radcliffe-orchestra" style={{ color: "inherit", textDecoration: "underline" }}>
+            Harvard-Radcliffe
+          </Link>
+        </p>
+        <p style={{ margin: 0 }}>
+          <Link to="/projects/harvard-radcliffe-orchestra" style={{ color: "inherit", textDecoration: "underline" }}>
+            Orchestra: Graphic Design
+          </Link>
           {" \u2192"}
         </p>
       </div>
@@ -200,6 +161,7 @@ const PROJECTS: ProjectConfig[] = [
     id: "lowell-house-opera",
     sidebarLabel: "Lowell House Opera",
     zIndex: 2,
+    hasProjectPage: false,
     title: (
       <div>
         <p style={{ margin: 0 }}>Lowell House Opera: Graphic</p>
@@ -215,8 +177,6 @@ const PROJECTS: ProjectConfig[] = [
   },
 ];
 
-const SIDEBAR_ITEMS: SectionNavItem[] = PROJECTS.map((project) => ({ id: project.id, label: project.sidebarLabel }));
-
 function ImageGrid({ items, gridStyle }: { items: GridImagePlacement[]; gridStyle: CSSProperties }) {
   return (
     <div style={gridStyle}>
@@ -231,60 +191,6 @@ function ImageGrid({ items, gridStyle }: { items: GridImagePlacement[]; gridStyl
 
 function PhotoCollage() {
   return <ImageGrid items={COLLAGE_IMAGES} gridStyle={styles.collageGrid} />;
-}
-
-interface SidebarProps {
-  heroItem: SectionNavItem;
-  items: SectionNavItem[];
-  activeSectionId: string;
-  onItemClick: (sectionId: string) => void;
-}
-
-function Sidebar({ heroItem, items, activeSectionId, onItemClick }: SidebarProps) {
-  return (
-    <div style={styles.sidebarWrap}>
-      <div style={styles.sidebar}>
-        <div style={styles.sidebarInner}>
-          <div style={styles.sidebarTopBlock}>
-            <div style={{ position: "relative", flexShrink: 0, width: "105px", height: "105px" }}>
-              <PhotoFrame photoId="arenal" src={arenal} />
-            </div>
-            <button
-              style={{
-                ...styles.sidebarName,
-                ...styles.sidebarNameButton,
-                ...(activeSectionId === heroItem.id ? styles.sidebarProjectButtonActive : null),
-              }}
-              type="button"
-              onClick={() => onItemClick(heroItem.id)}
-            >
-              {heroItem.label}
-            </button>
-          </div>
-
-          <Divider width={176} />
-
-          <div style={styles.sidebarProjectList}>
-            {items.map((item) => (
-              <button
-                key={item.id}
-                style={{
-                  ...styles.sidebarProjectButton,
-                  ...(activeSectionId === item.id ? styles.sidebarProjectButtonActive : null),
-                }}
-                type="button"
-                onClick={() => onItemClick(item.id)}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div aria-hidden="true" style={styles.sidebarBorder} />
-      </div>
-    </div>
-  );
 }
 
 interface HeroSectionProps {
@@ -376,15 +282,11 @@ function FeatureRow({ projectId, sectionRef, zIndex, title, subtitle, dates, ima
 }
 
 export default function App() {
-  const sectionIds = [HERO_SECTION.id, ...SIDEBAR_ITEMS.map((item) => item.id)];
-  const { activeSectionId, setSectionRef, jumpToSection } = useSectionNavigation({
-    sectionIds,
-    defaultSectionId: HERO_SECTION.id,
-    topSectionId: HERO_SECTION.id,
-  });
+  const sectionNav = useSectionNavContext();
+  const setSectionRef = sectionNav?.setSectionRef ?? (() => {});
 
   return (
-    <div style={styles.appRoot}>
+    <>
       <PhotoCollage />
 
       <div style={styles.decorativeAssetWrap}>
@@ -395,7 +297,6 @@ export default function App() {
         </div>
       </div>
 
-      <Sidebar heroItem={HERO_SECTION} items={SIDEBAR_ITEMS} activeSectionId={activeSectionId} onItemClick={jumpToSection} />
       <HeroSection sectionId={HERO_SECTION.id} sectionRef={(element) => setSectionRef(HERO_SECTION.id, element)} />
       <FullDivider />
 
@@ -413,6 +314,6 @@ export default function App() {
           {index < PROJECTS.length - 1 && <FullDivider />}
         </Fragment>
       ))}
-    </div>
+    </>
   );
 }
