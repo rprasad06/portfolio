@@ -72,16 +72,16 @@ export const collageCell: React.CSSProperties = {
 
 export const sidebarWrap: React.CSSProperties = {
   position: "absolute",
+  top: 0,
   bottom: 0,
-  height: "2284px",
   left: 0,
   pointerEvents: "none",
-  top: 0,
 };
 
 export const sidebar: React.CSSProperties = {
   backgroundColor: "white",
-  height: "832px",
+  height: "100dvh",
+  minHeight: "100vh",
   pointerEvents: "auto",
   position: "sticky",
   top: 0,
