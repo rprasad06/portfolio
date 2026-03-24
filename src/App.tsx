@@ -1,3 +1,6 @@
+import { Fragment } from "react";
+import type { CSSProperties, ReactNode } from "react";
+
 import arenal from "./assets/arenal.JPG";
 import bsn from "./assets/bsn.jpeg";
 import cafe from "./assets/cafe.JPG";
@@ -14,30 +17,74 @@ import orange from "./assets/orange.png";
 import shosty from "./assets/shosty.png";
 import square4x100 from "./assets/square@4x-100 1.png";
 import tree from "./assets/tree.jpeg";
-// import youthteam from "./assets/youthteam.JPEG";
+import * as styles from "./App.styles";
+import type { SectionNavItem } from "./sectionNavigation";
+import { useSectionNavigation } from "./sectionNavigation";
 
+type PhotoKey =
+  | "arenal"
+  | "ghungroo"
+  | "db"
+  | "cafe"
+  | "bsn"
+  | "desktop"
+  | "crimlogo"
+  | "lucky"
+  | "julia"
+  | "tree"
+  | "merch"
+  | "jeux"
+  | "shosty"
+  | "square4x100"
+  | "noexitWide"
+  | "orange";
 
-// ─── Shared style tokens ────────────────────────────────────────────────────
-const fontXanh: React.CSSProperties = {
-  fontFamily: "'Xanh Mono', monospace",
-  fontStyle: "normal",
-};
-const fontInterLight: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontWeight: 300,
-  fontStyle: "normal",
-};
-const fontInterLightItalic: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontWeight: 300,
-  fontStyle: "italic",
+const PHOTO_FRAME_PRESETS: Record<PhotoKey, { zoom: number; x: number; y: number }> = {
+  arenal: { zoom: 1, x: 0, y: 0 },
+  ghungroo: { zoom: 1, x: 0, y: 0 },
+  db: { zoom: 1.8, x: -20, y: 40 },
+  cafe: { zoom: 1, x: 0, y: 0 },
+  bsn: { zoom: 1, x: 0, y: 0 },
+  desktop: { zoom: 1, x: 0, y: 0 },
+  crimlogo: { zoom: 1, x: 0, y: 0 },
+  lucky: { zoom: 1, x: 0, y: 0 },
+  julia: { zoom: 2, x: 0, y: 0 },
+  tree: { zoom: 1.5, x: 30, y: -40 },
+  merch: { zoom: 1, x: 0, y: 0 },
+  jeux: { zoom: 1, x: 0, y: 0 },
+  shosty: { zoom: 1, x: 0, y: 0 },
+  square4x100: { zoom: 1, x: 0, y: 0 },
+  noexitWide: { zoom: 1, x: 0, y: 0 },
+  orange: { zoom: 1, x: 0, y: 0 },
 };
 
-// ─── Thin divider line ───────────────────────────────────────────────────────
+function photoStyle(key: PhotoKey): CSSProperties {
+  const preset = PHOTO_FRAME_PRESETS[key];
+  return {
+    position: "absolute",
+    inset: 0,
+    width: "100%",
+    height: "100%",
+    pointerEvents: "none",
+    objectFit: "cover",
+    objectPosition: "50% 50%",
+    transform: `translate(${preset.x}px, ${preset.y}px) scale(${preset.zoom})`,
+    transformOrigin: "center",
+  };
+}
+
+function PhotoFrame({ photoId, src }: { photoId: PhotoKey; src: string }) {
+  return (
+    <div style={styles.photoFrameContainer}>
+      <img alt="" style={photoStyle(photoId)} src={src} />
+    </div>
+  );
+}
+
 function Divider({ width = 395 }: { width?: number }) {
   return (
-    <div style={{ height: 0, position: "relative", flexShrink: 0, width: "100%" }}>
-      <div style={{ position: "absolute", inset: "-0.3px 0 0 0" }}>
+    <div style={styles.dividerContainer}>
+      <div style={styles.dividerInner}>
         <svg style={{ display: "block", width: "100%", height: "100%" }} fill="none" preserveAspectRatio="none" viewBox={`0 0 ${width} 0.3`}>
           <line stroke="black" strokeWidth="0.3" x2={width} y1="0.15" y2="0.15" />
         </svg>
@@ -46,11 +93,10 @@ function Divider({ width = 395 }: { width?: number }) {
   );
 }
 
-// ─── Full-width divider ──────────────────────────────────────────────────────
 function FullDivider() {
   return (
-    <div style={{ height: 0, position: "relative", flexShrink: 0, width: "100%" }}>
-      <div style={{ position: "absolute", inset: "-0.3px 0 0 0" }}>
+    <div style={styles.dividerContainer}>
+      <div style={styles.dividerInner}>
         <svg style={{ display: "block", width: "100%", height: "0.3px" }} fill="none" preserveAspectRatio="none" viewBox="0 0 1248 0.3">
           <line stroke="black" strokeWidth="0.3" x2="1248" y1="0.15" y2="0.15" />
         </svg>
@@ -59,215 +105,206 @@ function FullDivider() {
   );
 }
 
-// ─── Scattered photo collage (top-right) ─────────────────────────────────────
-function PhotoCollage() {
+interface GridImagePlacement {
+  photoId: PhotoKey;
+  src: string;
+  style: CSSProperties;
+}
+
+interface ProjectConfig {
+  id: string;
+  sidebarLabel: string;
+  zIndex: number;
+  title: ReactNode;
+  subtitle: string;
+  dates: ReactNode;
+  images: GridImagePlacement[];
+}
+
+const HERO_SECTION: SectionNavItem = { id: "hero-section", label: "Rahul Prasad" };
+
+const COLLAGE_IMAGES: GridImagePlacement[] = [
+  { photoId: "arenal", src: arenal, style: { ...styles.collageCell, gridColumn: 1, gridRow: 1 } },
+  { photoId: "ghungroo", src: ghungroo, style: { ...styles.collageCell, gridColumn: 3, gridRow: 3 } },
+  { photoId: "db", src: db, style: { ...styles.collageCell, gridColumn: 5, gridRow: 4 } },
+  { photoId: "cafe", src: cafe, style: { position: "absolute", left: "49px", width: "111.2px", height: "111.2px", top: "485px" } },
+  { photoId: "bsn", src: bsn, style: { position: "absolute", left: "392px", width: "111.2px", height: "111.2px", top: "34px" } },
+];
+
+const PROJECTS: ProjectConfig[] = [
+  {
+    id: "harvard-crimson",
+    sidebarLabel: "The Harvard Crimson",
+    zIndex: 8,
+    title: (
+      <p style={{ margin: 0 }}>
+        <span style={{ textDecoration: "underline" }}>The Harvard Crimson: UI/UX</span>
+        {" \u2192"}
+      </p>
+    ),
+    subtitle: "Website | Visual Identity | Branding",
+    dates: (
+      <>
+        <p style={{ margin: "0 0 1px 0" }}>Part-time: January 2024 - December 2025</p>
+        <p style={{ margin: 0 }}>Full-time: June 2024 - August 2024</p>
+      </>
+    ),
+    images: [
+      { photoId: "desktop", src: desktop, style: { ...styles.collageCell, gridColumn: 2, gridRow: 1 } },
+      { photoId: "crimlogo", src: crimlogo, style: { gridColumn: 4, gridRow: 2, alignSelf: "stretch", flexShrink: 0, position: "relative", width: "113.6px" } },
+    ],
+  },
+  {
+    id: "band-with-no-name",
+    sidebarLabel: "The Band with No Name",
+    zIndex: 6,
+    title: (
+      <div>
+        <p style={{ margin: 0, textDecoration: "underline" }}>The Band with No Name; Brand</p>
+        <p style={{ margin: 0 }}>
+          <span style={{ textDecoration: "underline" }}>Design</span>
+          {" \u2192"}
+        </p>
+      </div>
+    ),
+    subtitle: "Logo | Visual Identity | Posters | Social Media",
+    dates: <p style={{ margin: 0 }}>June 2023 - Present</p>,
+    images: [
+      { photoId: "lucky", src: lucky, style: { ...styles.collageCell, gridColumn: 5, gridRow: 1 } },
+      { photoId: "julia", src: julia, style: { ...styles.collageCell, gridColumn: 3, gridRow: 1 } },
+      { photoId: "tree", src: tree, style: { ...styles.collageCell, gridColumn: 1, gridRow: 2 } },
+    ],
+  },
+  {
+    id: "harvard-radcliffe-orchestra",
+    sidebarLabel: "Harvard-Radcliffe Orchestra",
+    zIndex: 4,
+    title: (
+      <div>
+        <p style={{ margin: 0, textDecoration: "underline" }}>Harvard-Radcliffe</p>
+        <p style={{ margin: 0 }}>
+          <span style={{ textDecoration: "underline" }}>Orchestra: Graphic Design</span>
+          {" \u2192"}
+        </p>
+      </div>
+    ),
+    subtitle: "Posters | Experimental Design | Visual Identity",
+    dates: <p style={{ margin: 0 }}>Part-time: January 2024 - March 2026</p>,
+    images: [
+      { photoId: "merch", src: merch, style: { ...styles.collageCell, gridColumn: 4, gridRow: 1 } },
+      { photoId: "jeux", src: jeux, style: { ...styles.collageCell, gridColumn: 2, gridRow: 2 } },
+      { photoId: "shosty", src: shosty, style: { ...styles.collageCell, gridColumn: 5, gridRow: 2 } },
+    ],
+  },
+  {
+    id: "lowell-house-opera",
+    sidebarLabel: "Lowell House Opera",
+    zIndex: 2,
+    title: (
+      <div>
+        <p style={{ margin: 0 }}>Lowell House Opera: Graphic</p>
+        <p style={{ margin: 0 }}>Design</p>
+      </div>
+    ),
+    subtitle: "Posters | Experimental Design | Visual Identity",
+    dates: <p style={{ margin: 0 }}>Commissioned Work: February 2026</p>,
+    images: [
+      { photoId: "square4x100", src: square4x100, style: { ...styles.collageCell, gridColumn: 2, gridRow: 1 } },
+      { photoId: "noexitWide", src: noexitWide, style: { gridColumn: "4 / span 2", gridRow: 2, justifySelf: "stretch", position: "relative", flexShrink: 0, aspectRatio: "1176/401" } },
+    ],
+  },
+];
+
+const SIDEBAR_ITEMS: SectionNavItem[] = PROJECTS.map((project) => ({ id: project.id, label: project.sidebarLabel }));
+
+function ImageGrid({ items, gridStyle }: { items: GridImagePlacement[]; gridStyle: CSSProperties }) {
   return (
-    <div
-      style={{
-        position: "absolute",
-        display: "grid",
-        gap: "10px",
-        gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-        gridTemplateRows: "repeat(5, minmax(0, 1fr))",
-        left: "calc(50% + 67px)",
-        overflow: "clip",
-        width: "596px",
-        height: "596px",
-        top: "79px",
-        zIndex: 13,
-      }}
-    >
-      {/* col-1 row-1 */}
-      <div style={{ gridColumn: 1, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
-      </div>
-      {/* col-3 row-3 */}
-      <div style={{ gridColumn: 3, gridRow: 3, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "249.07%", left: "-49.13%", top: "-44.37%", width: "149.3%", maxWidth: "none" }} src={ghungroo} />
+    <div style={gridStyle}>
+      {items.map(({ photoId, src, style }) => (
+        <div key={`${photoId}-${src}`} style={style}>
+          <PhotoFrame photoId={photoId} src={src} />
         </div>
-      </div>
-      {/* col-5 row-4 */}
-      <div style={{ gridColumn: 5, gridRow: 4, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={db} />
-      </div>
-      {/* absolute floaters */}
-      <div style={{ position: "absolute", left: "49px", width: "111.2px", height: "111.2px", top: "485px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={cafe} />
-      </div>
-      <div style={{ position: "absolute", left: "392px", width: "111.2px", height: "111.2px", top: "34px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={bsn} />
-      </div>
+      ))}
     </div>
   );
 }
 
-// ─── Sidebar ─────────────────────────────────────────────────────────────────
-function Sidebar() {
+function PhotoCollage() {
+  return <ImageGrid items={COLLAGE_IMAGES} gridStyle={styles.collageGrid} />;
+}
+
+interface SidebarProps {
+  heroItem: SectionNavItem;
+  items: SectionNavItem[];
+  activeSectionId: string;
+  onItemClick: (sectionId: string) => void;
+}
+
+function Sidebar({ heroItem, items, activeSectionId, onItemClick }: SidebarProps) {
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 0,
-        height: "2284px",
-        left: 0,
-        pointerEvents: "none",
-        top: 0,
-      }}
-    >
-      <div
-        style={{
-          backgroundColor: "white",
-          height: "832px",
-          pointerEvents: "auto",
-          position: "sticky",
-          top: 0,
-          width: "240px",
-          zIndex: 11,
-          boxSizing: "border-box",
-        }}
-      >
-        {/* Inner content */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "24px",
-            alignItems: "flex-start",
-            justifyContent: "center",
-            overflow: "hidden",
-            padding: "0 32px",
-            position: "relative",
-            width: "100%",
-            height: "100%",
-            boxSizing: "border-box",
-          }}
-        >
-          {/* Photo + name */}
-          <div
-            style={{
-              display: "flex",
-              flex: "1 0 0",
-              flexDirection: "column",
-              gap: "32px",
-              alignItems: "flex-start",
-              justifyContent: "flex-end",
-              minHeight: "1px",
-              minWidth: "1px",
-              position: "relative",
-              width: "100%",
-            }}
-          >
+    <div style={styles.sidebarWrap}>
+      <div style={styles.sidebar}>
+        <div style={styles.sidebarInner}>
+          <div style={styles.sidebarTopBlock}>
             <div style={{ position: "relative", flexShrink: 0, width: "105px", height: "105px" }}>
-              <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={arenal} />
+              <PhotoFrame photoId="arenal" src={arenal} />
             </div>
-            <p
+            <button
               style={{
-                ...fontInterLight,
-                fontSize: "12px",
-                color: "black",
-                lineHeight: "normal",
-                margin: 0,
-                textDecoration: "underline",
-                textDecorationColor: "#4392dc",
-                flexShrink: 0,
-                width: "min-content",
-                whiteSpace: "nowrap",
+                ...styles.sidebarName,
+                ...styles.sidebarNameButton,
+                ...(activeSectionId === heroItem.id ? styles.sidebarProjectButtonActive : null),
               }}
+              type="button"
+              onClick={() => onItemClick(heroItem.id)}
             >
-              Rahul Prasad
-            </p>
+              {heroItem.label}
+            </button>
           </div>
 
-          {/* Divider */}
-          <div style={{ height: 0, position: "relative", flexShrink: 0, width: "100%" }}>
-            <div style={{ position: "absolute", inset: "-0.3px 0 0 0" }}>
-              <svg style={{ display: "block", width: "100%", height: "0.3px" }} fill="none" preserveAspectRatio="none" viewBox="0 0 176 0.3">
-                <line stroke="black" strokeWidth="0.3" x2="176" y1="0.15" y2="0.15" />
-              </svg>
-            </div>
-          </div>
+          <Divider width={176} />
 
-          {/* Project list */}
-          <div
-            style={{
-              display: "flex",
-              flex: "1 0 0",
-              flexDirection: "column",
-              gap: "16px",
-              alignItems: "flex-start",
-              minHeight: "1px",
-              minWidth: "1px",
-              position: "relative",
-              width: "100%",
-              ...fontInterLight,
-              fontSize: "12px",
-              color: "black",
-              lineHeight: "normal",
-            }}
-          >
-            {["The Harvard Crimson", "The Band with No Name", "Harvard-Radcliffe Orchestra", "Lowell House Opera"].map((item) => (
-              <p key={item} style={{ margin: 0, flexShrink: 0, width: "100%" }}>{item}</p>
+          <div style={styles.sidebarProjectList}>
+            {items.map((item) => (
+              <button
+                key={item.id}
+                style={{
+                  ...styles.sidebarProjectButton,
+                  ...(activeSectionId === item.id ? styles.sidebarProjectButtonActive : null),
+                }}
+                type="button"
+                onClick={() => onItemClick(item.id)}
+              >
+                {item.label}
+              </button>
             ))}
           </div>
         </div>
 
-        {/* Blue border overlay */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            inset: 0,
-            border: "0.5px solid #4392dc",
-            pointerEvents: "none",
-          }}
-        />
+        <div aria-hidden="true" style={styles.sidebarBorder} />
       </div>
     </div>
   );
 }
 
-// ─── Hero / Top section ──────────────────────────────────────────────────────
-function HeroSection() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        gap: "32px",
-        alignItems: "center",
-        position: "relative",
-        flexShrink: 0,
-        width: "100%",
-        zIndex: 10,
-      }}
-    >
-      {/* Left spacer */}
-      <div style={{ height: "216px", flexShrink: 0, width: "181px" }} />
+interface HeroSectionProps {
+  sectionId: string;
+  sectionRef: (element: HTMLDivElement | null) => void;
+}
 
-      {/* Center: bio */}
-      <div
-        style={{
-          backgroundColor: "rgba(255,255,255,0.1)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "10px",
-          alignItems: "flex-start",
-          padding: "127px 0",
-          flexShrink: 0,
-          position: "sticky",
-          top: 0,
-          width: "395px",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start", position: "relative", flexShrink: 0, width: "100%" }}>
-          {/* Name */}
-          <div style={{ ...fontXanh, fontSize: "26px", lineHeight: "normal", color: "black", height: "61px", width: "94px", flexShrink: 0, position: "relative" }}>
+function HeroSection({ sectionId, sectionRef }: HeroSectionProps) {
+  return (
+    <div id={sectionId} ref={sectionRef} style={{ ...styles.sectionRow, ...styles.featureSection, zIndex: 10 }}>
+      <div style={styles.leftSpacer} />
+
+      <div style={styles.heroStickyCenter}>
+        <div style={styles.centerContent}>
+          <div style={styles.nameBlock}>
             <p style={{ margin: "0 0 0 0" }}>Rahul</p>
             <p style={{ margin: 0 }}>Prasad</p>
           </div>
 
-          {/* Bio text */}
-          <div style={{ ...fontInterLight, fontSize: "14px", color: "black", lineHeight: "normal", width: "100%" }}>
+          <div style={styles.bodyText}>
             <p style={{ margin: "0 0 10px 0" }}>I'm a designer who loves making things look and feel good.</p>
             <p style={{ margin: "0 0 10px 0" }}>
               I believe in revealing{" "}
@@ -279,320 +316,103 @@ function HeroSection() {
 
           <Divider width={395} />
 
-          {/* Education */}
-          <div style={{ ...fontInterLight, fontSize: "14px", color: "black", lineHeight: "normal" }}>
-            <p style={{ margin: "0 0 1px 0" }}>2022 – 2026</p>
+          <div style={styles.educationText}>
+            <p style={{ margin: "0 0 1px 0" }}>2022 - 2026</p>
             <p style={{ margin: "0 0 1px 0" }}>B.A. in Computer Science & Music</p>
             <p style={{ margin: 0 }}>Harvard College</p>
           </div>
         </div>
 
-        {/* About me link */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "64px",
-            alignItems: "flex-start",
-            paddingBottom: "32px",
-            paddingTop: "64px",
-            position: "relative",
-            flexShrink: 0,
-            width: "100%",
-          }}
-        >
-          <p style={{ ...fontXanh, fontSize: "20px", color: "black", lineHeight: "normal", margin: 0, whiteSpace: "nowrap" }}>
+        <div style={styles.aboutWrap}>
+          <p style={styles.aboutLink}>
             <span style={{ textDecoration: "underline" }}>about me</span>
-            {" →"}
+            {" \u2192"}
           </p>
         </div>
       </div>
 
-      {/* Right spacer */}
-      <div style={{ flex: "1 0 0", height: "254px", minHeight: "1px", minWidth: "1px", position: "relative" }} />
+      <div style={styles.rightSpacer} />
     </div>
   );
 }
 
-// ─── Project feature row ─────────────────────────────────────────────────────
 interface FeatureRowProps {
+  projectId: string;
+  sectionRef: (element: HTMLDivElement | null) => void;
   zIndex: number;
-  title: React.ReactNode;
+  title: ReactNode;
   subtitle: string;
-  dates: React.ReactNode;
-  images: React.ReactNode;
+  dates: ReactNode;
+  images: GridImagePlacement[];
 }
 
-function FeatureRow({ zIndex, title, subtitle, dates, images }: FeatureRowProps) {
+function FeatureRow({ projectId, sectionRef, zIndex, title, subtitle, dates, images }: FeatureRowProps) {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "32px",
-        alignItems: "center",
-        position: "relative",
-        flexShrink: 0,
-        width: "100%",
-        zIndex,
-      }}
-    >
-      {/* Left spacer */}
+    <div id={projectId} ref={sectionRef} style={{ ...styles.sectionRow, ...styles.featureSection, zIndex }}>
       <div style={{ display: "flex", flexDirection: "row", alignItems: "center", alignSelf: "stretch" }}>
         <div style={{ height: "100%", position: "relative", flexShrink: 0, width: "181px" }} />
       </div>
 
-      {/* Center: project info */}
-      <div
-        style={{
-          backgroundColor: "rgba(255,255,255,0.1)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-start",
-          flexShrink: 0,
-          position: "sticky",
-          top: 0,
-          width: "395px",
-        }}
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "22px", alignItems: "flex-start", position: "relative", flexShrink: 0, width: "100%" }}>
-          {/* Title */}
-          <div style={{ ...fontXanh, fontSize: "26px", color: "black", lineHeight: "normal", flexShrink: 0, position: "relative" }}>
-            {title}
-          </div>
+      <div style={styles.stickyCenter}>
+        <div style={styles.centerContent}>
+          <div style={styles.featureTitle}>{title}</div>
 
-          {/* Subtitle */}
-          <div style={{ ...fontInterLightItalic, fontSize: "14px", color: "black", lineHeight: "normal", width: "100%" }}>
+          <div style={styles.featureSubtitle}>
             <p style={{ margin: "0 0 10px 0" }}>{subtitle}</p>
             <p style={{ margin: 0 }}>&nbsp;</p>
           </div>
 
           <Divider width={395} />
 
-          {/* Dates */}
-          <div style={{ ...fontInterLight, fontSize: "14px", color: "black", lineHeight: "normal" }}>
-            {dates}
-          </div>
+          <div style={styles.featureDates}>{dates}</div>
         </div>
       </div>
 
-      {/* Right: images */}
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "relative", flexShrink: 0, width: "608px" }}>
-        <div
-          style={{
-            display: "grid",
-            gap: "10px",
-            gridTemplateColumns: "repeat(5, minmax(0, 1fr))",
-            gridTemplateRows: "repeat(2, minmax(0, 1fr))",
-            height: "232px",
-            overflow: "clip",
-            position: "relative",
-            flexShrink: 0,
-            width: "100%",
-          }}
-        >
-          {images}
-        </div>
+      <div style={styles.featureRight}>
+        <ImageGrid items={images} gridStyle={styles.featureGrid} />
       </div>
     </div>
   );
 }
 
-// ─── Project 1: Harvard Crimson ──────────────────────────────────────────────
-function CrimsonImages() {
-  return (
-    <>
-      <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={desktop} />
-      </div>
-      <div style={{ gridColumn: 4, gridRow: 2, alignSelf: "stretch", flexShrink: 0, position: "relative", width: "113.6px" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={crimlogo} />
-      </div>
-    </>
-  );
-}
-
-// ─── Project 2: Band with No Name ───────────────────────────────────────────
-function BandImages() {
-  return (
-    <>
-      <div style={{ gridColumn: 5, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "124.22%", left: "-30.99%", top: "-24.37%", width: "162%", maxWidth: "none" }} src={lucky} />
-        </div>
-      </div>
-      <div style={{ gridColumn: 3, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "221.62%", left: "-56.73%", top: "-110.66%", width: "288.73%", maxWidth: "none" }} src={julia} />
-        </div>
-      </div>
-      <div style={{ gridColumn: 1, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "155.7%", left: "-51.8%", top: "-21.95%", width: "203.51%", maxWidth: "none" }} src={tree} />
-        </div>
-      </div>
-    </>
-  );
-}
-
-// ─── Project 3: Harvard-Radcliffe Orchestra ──────────────────────────────────
-function OrchestraImages() {
-  return (
-    <>
-      <div style={{ gridColumn: 4, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={merch} />
-      </div>
-      <div style={{ gridColumn: 2, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "311.15%", left: "-121.82%", top: "-55.89%", width: "498.72%", maxWidth: "none" }} src={jeux} />
-        </div>
-      </div>
-      <div style={{ gridColumn: 5, gridRow: 2, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={shosty} />
-      </div>
-    </>
-  );
-}
-
-// ─── Project 4: Lowell House Opera ──────────────────────────────────────────
-function OperaImages() {
-  return (
-    <>
-      <div style={{ gridColumn: 2, gridRow: 1, justifySelf: "stretch", alignSelf: "stretch", position: "relative", flexShrink: 0 }}>
-        <div style={{ position: "absolute", inset: 0, overflow: "hidden", pointerEvents: "none" }}>
-          <img alt="" style={{ position: "absolute", height: "102.34%", left: 0, top: "-1.17%", width: "100%", maxWidth: "none" }} src={square4x100} />
-        </div>
-      </div>
-      <div style={{ gridColumn: "4 / span 2", gridRow: 2, justifySelf: "stretch", position: "relative", flexShrink: 0, aspectRatio: "1176/401" }}>
-        <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={noexitWide} />
-      </div>
-    </>
-  );
-}
-
-// ─── Root export ─────────────────────────────────────────────────────────────
 export default function App() {
+  const sectionIds = [HERO_SECTION.id, ...SIDEBAR_ITEMS.map((item) => item.id)];
+  const { activeSectionId, setSectionRef, jumpToSection } = useSectionNavigation({
+    sectionIds,
+    defaultSectionId: HERO_SECTION.id,
+    topSectionId: HERO_SECTION.id,
+  });
+
   return (
-    <div
-      style={{
-        backgroundColor: "white",
-        display: "flex",
-        flexDirection: "column",
-        gap: "64px",
-        isolation: "isolate",
-        alignItems: "flex-start",
-        padding: "96px",
-        position: "relative",
-        width: "100%",
-        minHeight: "100vh",
-        boxSizing: "border-box",
-      }}
-    >
-      {/* Decorative scattered photos */}
+    <div style={styles.appRoot}>
       <PhotoCollage />
 
-      {/* Large decorative asset (background texture) */}
-      <div
-        style={{
-          position: "absolute",
-          display: "flex",
-          height: "1843.969px",
-          alignItems: "center",
-          justifyContent: "center",
-          left: "-82px",
-          top: "-968px",
-          width: "1981.758px",
-          zIndex: 12,
-          pointerEvents: "none",
-        }}
-      >
-        <div style={{ flexShrink: 0, transform: "rotate(-146.53deg)" }}>
-          <div style={{ height: "1136.812px", position: "relative", width: "1624.131px" }}>
-            <img alt="" style={{ position: "absolute", inset: 0, objectFit: "cover", pointerEvents: "none", width: "100%", height: "100%" }} src={orange} />
+      <div style={styles.decorativeAssetWrap}>
+        <div style={styles.decorativeAssetRotator}>
+          <div style={styles.decorativeAssetFrame}>
+            <PhotoFrame photoId="orange" src={orange} />
           </div>
         </div>
       </div>
 
-      {/* Sticky sidebar */}
-      <Sidebar />
-
-      {/* Hero / Bio */}
-      <HeroSection />
-
-      {/* Full-width divider */}
+      <Sidebar heroItem={HERO_SECTION} items={SIDEBAR_ITEMS} activeSectionId={activeSectionId} onItemClick={jumpToSection} />
+      <HeroSection sectionId={HERO_SECTION.id} sectionRef={(element) => setSectionRef(HERO_SECTION.id, element)} />
       <FullDivider />
 
-      {/* Project 1: Harvard Crimson */}
-      <FeatureRow
-        zIndex={8}
-        title={
-          <p style={{ margin: 0 }}>
-            <span style={{ textDecoration: "underline" }}>The Harvard Crimson: UI/UX</span>
-            {" →"}
-          </p>
-        }
-        subtitle="Website | Visual Identity | Branding"
-        dates={
-          <>
-            <p style={{ margin: "0 0 1px 0" }}>Part-time: January 2024 – December 2025</p>
-            <p style={{ margin: 0 }}>Full-time: June 2024 – August 2024</p>
-          </>
-        }
-        images={<CrimsonImages />}
-      />
-
-      <FullDivider />
-
-      {/* Project 2: Band with No Name */}
-      <FeatureRow
-        zIndex={6}
-        title={
-          <div>
-            <p style={{ margin: "0 0 0 0", textDecoration: "underline" }}>The Band with No Name; Brand</p>
-            <p style={{ margin: 0 }}>
-              <span style={{ textDecoration: "underline" }}>Design</span>
-              {" →"}
-            </p>
-          </div>
-        }
-        subtitle="Logo | Visual Identity | Posters | Social Media"
-        dates={<p style={{ margin: 0 }}>June 2023 – Present</p>}
-        images={<BandImages />}
-      />
-
-      <FullDivider />
-
-      {/* Project 3: Harvard-Radcliffe Orchestra */}
-      <FeatureRow
-        zIndex={4}
-        title={
-          <div>
-            <p style={{ margin: "0 0 0 0", textDecoration: "underline" }}>Harvard-Radcliffe</p>
-            <p style={{ margin: 0 }}>
-              <span style={{ textDecoration: "underline" }}>Orchestra: Graphic Design</span>
-              {" →"}
-            </p>
-          </div>
-        }
-        subtitle="Posters | Experimental Design | Visual Identity"
-        dates={<p style={{ margin: 0 }}>Part-time: January 2024 – March 2026</p>}
-        images={<OrchestraImages />}
-      />
-
-      <FullDivider />
-
-      {/* Project 4: Lowell House Opera */}
-      <FeatureRow
-        zIndex={2}
-        title={
-          <div>
-            <p style={{ margin: "0 0 0 0" }}>Lowell House Opera: Graphic</p>
-            <p style={{ margin: 0 }}>Design</p>
-          </div>
-        }
-        subtitle="Posters | Experimental Design | Visual Identity"
-        dates={<p style={{ margin: 0 }}>Commissioned Work: February 2026</p>}
-        images={<OperaImages />}
-      />
+      {PROJECTS.map((project, index) => (
+        <Fragment key={project.zIndex}>
+          <FeatureRow
+            projectId={project.id}
+            sectionRef={(element) => setSectionRef(project.id, element)}
+            zIndex={project.zIndex}
+            title={project.title}
+            subtitle={project.subtitle}
+            dates={project.dates}
+            images={project.images}
+          />
+          {index < PROJECTS.length - 1 && <FullDivider />}
+        </Fragment>
+      ))}
     </div>
   );
 }
