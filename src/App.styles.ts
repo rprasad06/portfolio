@@ -183,7 +183,7 @@ export const sidebarProjectButtonActive: React.CSSProperties = {
 export const sidebarBorder: React.CSSProperties = {
   position: "absolute",
   inset: 0,
-  border: "0.5px solid #4392dc",
+  borderRight: "0.5px solid #4392dc",
   pointerEvents: "none",
 };
 
