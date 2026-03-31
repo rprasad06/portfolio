@@ -1,0 +1,14 @@
+---
+description: Omit redundant Tailwind/CSS classes; keep markup minimal
+alwaysApply: true
+---
+
+# No redundant utility classes
+
+When editing JSX/TSX or hand-written CSS in this repo:
+
+- **Do not** add classes that only restate browser or Tailwind defaults for that element/context (e.g. `content-stretch` on a single-line flex row, `w-full` on a block that already fills its containing block, `text-black` when `foreground` is already inherited).
+- **Do not** duplicate what parent theme or layout already sets unless you need an explicit override.
+- **Keep** utilities that change layout, spacing, typography, color, or behavior in a non-default way—including overrides that are required for correctness (e.g. `pointer-events-auto` to counter an ancestor’s `pointer-events-none`).
+
+Before adding a class, ask: if removed, would the rendered result or required behavior change? If no, omit it.
