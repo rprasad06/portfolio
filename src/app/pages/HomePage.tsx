@@ -153,14 +153,22 @@ export const workNavItems = projects.map((p) => ({ id: p.id, name: p.title }));
 export default function HomePage() {
   const location = useLocation();
 
+  // Use `window.location.hash`, not `location.hash`: React Router’s location can omit the
+  // fragment on client-side navigations, while the URL bar still has `#…` (reload then uses
+  // the real URL, so native fragment scroll masked the bug).
   useLayoutEffect(() => {
-    const hash = location.hash.replace(/^#/, '');
+    const hash = window.location.hash.replace(/^#/, '');
     if (!hash) return;
-    const el = document.getElementById(hash);
-    if (!el) return;
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-  }, [location.pathname, location.hash]);
+    const opts: ScrollIntoViewOptions = {
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'start',
+    };
+    const raf = requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView(opts);
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [location.pathname, location.search, location.key]);
 
   return (
     <div
