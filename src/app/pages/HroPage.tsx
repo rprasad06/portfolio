@@ -47,15 +47,18 @@ export default function HroPage() {
       className="relative z-[1] flex w-[715px] shrink-0 flex-col items-start"
       data-name="body"
     >
-      <PosterSurf className="w-full" posterSrc={HRO_POSTER_SURF_IMAGES} />
-
-      {/* Name section — same shell as HomePage NameSection */}
       <div
-        className="flex h-[var(--viewport-height)] max-h-[100dvh] w-full min-w-0 max-w-[715px] shrink-0 flex-col items-start"
+        className="h-[55dvh] py-[60px] w-full min-w-0 shrink-0"
+        data-name="hro-poster-surf-shell"
+      >
+        <PosterSurf className="h-full w-full min-h-0" posterSrc={HRO_POSTER_SURF_IMAGES} />
+      </div>
+      <div
+        className="flex h-[var(--viewport-height)] pt-[60px] max-h-[100dvh] w-full min-w-0 max-w-[715px] shrink-0 flex-col items-start"
         data-name="name section"
       >
         <div
-          className="flex h-[var(--unit)] pb-[16px] w-full shrink-0 items-end"
+          className="flex pb-[16px] w-full shrink-0 items-end"
           data-name="1/2vh"
         >
           <div className="type-xanh-26 min-w-0 shrink-0 leading-[0]">
