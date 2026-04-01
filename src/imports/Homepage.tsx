@@ -107,7 +107,7 @@ function Frame4() {
 
 function NameSection() {
   return (
-    <div className="bg-[rgba(255,255,255,0.2)] content-stretch flex flex-col h-[832px] items-start relative shrink-0 w-[715px]" data-name="name section">
+    <div className="bg-[rgba(255,255,255,0.2)] content-stretch flex flex-col h-[832px] items-start relative shrink-0 w-[var(--half-viewport-width)]" data-name="name section">
       <Component12Vh />
       <Frame4 />
     </div>

@@ -1,9 +1,11 @@
 import { useCallback, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router';
+import research1905 from '../components/assets/1905.png';
+import bowlingRef from '../components/assets/bowling.png';
+import mockups1905 from '../components/assets/1905 mockups.png';
+import posterMockups from '../components/assets/posters mockup.jpg';
+import { POSTER_SURF_ASSETS } from '../components/assets/posters';
 import PosterSurf from '../components/PosterSurf';
-import hroPosterRef from '../../assets/hro-reference.png';
-
-const HRO_POSTER_SURF_IMAGES = Array.from({ length: 8 }, () => hroPosterRef);
 
 /** Matches ProjectCard title row on HomePage. */
 const TITLE_BAND =
@@ -11,15 +13,15 @@ const TITLE_BAND =
 
 /** Matches ProjectCard body column on HomePage (scroll lives in section body, not window sticky). */
 const BODY_STACK =
-  'type-inter-14 flex w-full max-w-[395px] flex-col gap-[32px] items-start';
+  'type-inter-14 flex w-full flex-col gap-[32px] items-start';
 
 /** Overview includes a full-width metadata grid; keep the same gap rhythm as ProjectCard. */
 const BODY_OVERVIEW =
-  'type-inter-14 flex w-full max-w-[715px] flex-col gap-[32px] items-start bg-white/20';
+  'type-inter-14 flex w-full max-w-[var(--half-viewport-width)] flex-col gap-[32px] items-start bg-white/20';
 
 /** At most one viewport tall; body scrolls when content is taller. */
 const SECTION_CAP =
-  'max-h-[100dvh] min-h-0 flex w-full flex-col overflow-hidden';
+  ' flex w-full flex-col overflow-hidden';
 
 export default function HroPage() {
   const location = useLocation();
@@ -44,17 +46,17 @@ export default function HroPage() {
 
   return (
     <article
-      className="relative z-[1] flex w-[715px] shrink-0 flex-col items-start"
+      className="relative z-[1] flex w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
       data-name="body"
     >
       <div
-        className="h-[55dvh] py-[60px] w-full min-w-0 shrink-0"
+        className="h-[60dvh] min-h-[400px] py-[80px] w-full min-w-0 shrink-0"
         data-name="hro-poster-surf-shell"
       >
-        <PosterSurf className="h-full w-full min-h-0" posterSrc={HRO_POSTER_SURF_IMAGES} />
+        <PosterSurf className="h-full w-full min-h-0" posterSrc={POSTER_SURF_ASSETS} />
       </div>
       <div
-        className="flex h-[var(--viewport-height)] pt-[60px] max-h-[100dvh] w-full min-w-0 max-w-[715px] shrink-0 flex-col items-start"
+        className="flex h-[var(--unit)] pt-[60px] max-h-[100dvh] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
         data-name="name section"
       >
         <div
@@ -121,20 +123,10 @@ export default function HroPage() {
         </div>
       </section>
 
-      <div
-        className="relative flex h-[819px] max-h-[100dvh] w-full shrink-0 flex-col items-start overflow-hidden pt-32"
-        data-name="photo"
-      >
-        <div
-          className="pointer-events-none absolute left-[-416px] top-0 h-[819px] w-[1440px]"
-          data-name="image 1"
-        />
-      </div>
-
       {/* Problem */}
       <section
         id="problem"
-        className={`scroll-mt-[var(--nav-height)] ${SECTION_CAP}`}
+        className={`scroll-mt-[var(--nav-height)] min-h-[100dvh] ${SECTION_CAP}`}
         data-name="research section"
       >
         <div className={TITLE_BAND} data-name="title">
@@ -149,12 +141,23 @@ export default function HroPage() {
             logistics and organization of materials. In 2024, the student board decided to introduce
             the graphic design role, which I have filled since. As a result of the lack of a
             designated graphic designer, the old publication materials were uninteresting and lacked
-            creativity.
+            originality.
           </p>
         </div>
       </section>
 
-      {/* Case study — title band matches homepage; body uses full column width for image rows */}
+      <div
+        className="relative shrink-0 items-center justify-center bg-[#312f30]"
+        data-name="poster-mockups"
+      >
+        <img
+          alt=""
+          className="pointer-events-none max-h-full max-w-[80dvw] object-contain"
+          src={posterMockups}
+          draggable={false}
+        />
+      </div>
+
       <section
         id="case-study"
         className={`scroll-mt-[var(--nav-height)] ${SECTION_CAP}`}
@@ -166,11 +169,11 @@ export default function HroPage() {
           </h2>
         </div>
         <div
-          className="flex min-h-0 w-full min-w-0 max-w-[715px] flex-1 flex-col gap-16 overflow-y-auto"
+          className="flex min-h-0 w-full min-w-0 max-w-[var(--half-viewport-width)] flex-1 flex-col gap-24 py-2 pr-1"
           data-name="body"
         >
-          <div className="flex flex-col gap-8 md:flex-row md:gap-8">
-            <div className="flex min-w-0 max-w-[395px] flex-1 flex-col gap-3">
+          <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-14">
+            <div className="flex min-w-0 max-w-[395px] flex-1 flex-col gap-5">
               <p className="type-inter-10-caps">Research</p>
               <p className="type-inter-14 leading-[normal]">
                 Shostakovich&apos;s Symphony No. 11 is also titled The Year 1905.
@@ -185,14 +188,20 @@ export default function HroPage() {
                 battle.
               </p>
             </div>
-            <div
-              className="h-[242px] w-full shrink-0 rounded-lg shadow-[2px_2px_24px_0px_rgba(0,0,0,0.25)] md:w-[430px]"
-              data-name="image 2"
-            />
+            <figure className="m-0 w-full shrink-0 md:w-[min(460px,42vw)]" data-name="research-image">
+              <div className="relative aspect-[4/3] w-full overflow-hidden md:aspect-[3/2] md:min-h-[280px]">
+                <img
+                  alt="Reference imagery for the year 1905 and Bloody Sunday"
+                  className="absolute inset-0 size-full object-cover"
+                  src={research1905}
+                  draggable={false}
+                />
+              </div>
+            </figure>
           </div>
 
-          <div className="flex flex-col gap-8 md:flex-row md:gap-8">
-            <div className="flex min-w-0 max-w-[395px] flex-1 flex-col gap-3">
+          <div className="flex flex-col gap-12 md:flex-row md:items-start md:gap-14 pb-[var(--unit)]">
+            <div className="flex min-w-0 max-w-[395px] flex-1 flex-col gap-5">
               <p className="type-inter-10-caps">Ideation</p>
               <p className="type-inter-14 leading-[normal]">Postcard created in 1905.</p>
               <p className="type-inter-14 leading-[normal]">
@@ -200,27 +209,36 @@ export default function HroPage() {
                 massacre and its color scheme and aesthetic.
               </p>
             </div>
-            <div className="flex w-full shrink-0 flex-col gap-2.5 md:w-[430px]">
-              <div
-                className="aspect-[1024/576] w-full rounded-lg shadow-[2px_2px_12px_0px_rgba(0,0,0,0.25)]"
-                data-name="image 2"
-              />
-              <p className="type-inter-10-caps text-center leading-[normal]">
+            <figure className="m-0 flex w-full shrink-0 flex-col gap-4 md:w-[min(460px,42vw)]" data-name="ideation-image">
+              <div className="relative aspect-[1024/576] w-full  md:min-h-[260px]">
+                <img
+                  alt="1905 postcard, Bowling, artist unknown"
+                  className="absolute inset-0 size-full object-cover"
+                  src={bowlingRef}
+                  draggable={false}
+                />
+              </div>
+              <figcaption className="type-inter-10-caps px-0.5 text-center leading-[normal] md:text-left">
                 <span className="italic">BOWLING, </span>
                 ARTIST UNKNOWN. 1905.
-              </p>
-            </div>
+              </figcaption>
+            </figure> 
+              
           </div>
         </div>
       </section>
 
-      <div className="relative h-[1043px] max-h-[100dvh] w-full shrink-0 overflow-hidden">
-        <div
-          className="absolute left-[-416px] top-[211px] flex h-[832px] w-[1440px] flex-col items-center justify-center bg-[#312f30]"
-          data-name="photo"
-        >
-          <div className="relative h-[502px] w-[716px] shrink-0" data-name="image 3" />
-        </div>
+      <div
+        className="relative shrink-0 bg-[#312f30] h-[100dvh] flex items-center justify-center"
+        style={{ width: 'calc(100dvw - var(--sidebar-width))' }}
+        data-name="mockups-1905"
+      >
+        <img
+          alt=""
+          className="pointer-events-none block h-auto max-w-none"
+          src={mockups1905}
+          draggable={false}
+        />
       </div>
 
       {/* Reflections */}
@@ -235,7 +253,7 @@ export default function HroPage() {
           </h2>
         </div>
         <div className={`${BODY_STACK} min-h-0 flex-1 overflow-y-auto`} data-name="body">
-          <p className="min-w-full w-[min-content] shrink-0 leading-[normal]">
+          <p className="min-w-full w-full shrink-0 leading-[normal]">
             For this project with the Shostakovich symphony, it was my first time incorporating a
             pre-existing artwork into my own poster as a basis for the aesthetic and color palette
             used. I&apos;m happy with how the artwork interacts with the fonts and layering with

@@ -1,39 +1,80 @@
 import { motion, useReducedMotion } from 'framer-motion';
-import { useState } from 'react';
+import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
-const POSTER_COUNT = 8;
-/** How much each poster overlaps the previous (px). Larger = tighter row. */
-const POSTER_OVERLAP_PX = 150;
 
-/** Local perspective distance (px) — applied per poster so identical rotateY reads the same. */
-const LOCAL_PERSPECTIVE_PX = 500;
-
-/**
- * Resting Y rotation per slot (left + / right −). These values never change when another
- * poster is focused — only scale / front-facing change applies to the hovered item.
- */
-const REST_ROTATE_Y_DEG: number = -70;
-
+const OVERLAP_RATIO = 1.3;
+const SPREAD = 1.3;
+const PERSPECTIVE = 800;
+const REST_Y = -50;
+const STICKY = 200;
 const spring = { type: 'spring' as const, stiffness: 420, damping: 32, mass: 0.8 };
 
-/** Negative margin pulls each poster over the previous; 0 = no overlap on that seam. */
-function overlapMarginLeft(i: number, hovered: number | null): number {
+function marginLeft(i: number, h: number | null, overlap: number) {
   if (i === 0) return 0;
-  if (hovered === null) return -POSTER_OVERLAP_PX;
-  // Focused poster: clear overlap with left neighbor and with right neighbor.
-  if (i === hovered || i === hovered + 1) return 0;
-  return -POSTER_OVERLAP_PX;
+  if (h === null) return -overlap;
+  const pairMargin = -overlap + overlap * SPREAD;
+  if (i === h || i === h + 1) return pairMargin;
+  return -overlap;
 }
 
-type PosterSurfProps = {
-  /** Optional poster images (portrait); falls back to placeholder panels. */
-  posterSrc?: readonly string[];
-  className?: string;
-};
+/** 1) Point in any card → index with nearest horizontal center. 2) Else sticky pads beside `prev`. */
+function hitTest(
+  x: number,
+  y: number,
+  refs: (HTMLElement | null)[],
+  prev: number | null,
+): number | null {
+  const rects = refs.map((el) => el?.getBoundingClientRect() ?? null);
+  let best: { i: number; d: number } | null = null;
+  for (let i = 0; i < rects.length; i++) {
+    const r = rects[i];
+    if (!r || x < r.left || x > r.right || y < r.top || y > r.bottom) continue;
+    const d = Math.abs(x - (r.left + r.right) / 2);
+    if (!best || d < best.d) best = { i, d };
+  }
+  if (best) return best.i;
+  const r = prev != null ? rects[prev] : null;
+  if (
+    r &&
+    y >= r.top &&
+    y <= r.bottom &&
+    ((x >= r.left - STICKY && x < r.left) || (x > r.right && x <= r.right + STICKY))
+  ) {
+    return prev;
+  }
+  return null;
+}
 
-export default function PosterSurf({ posterSrc, className }: PosterSurfProps) {
+export default function PosterSurf({
+  posterSrc,
+  className,
+}: {
+  posterSrc: readonly string[];
+  className?: string;
+}) {
   const [hovered, setHovered] = useState<number | null>(null);
+  const [overlapPx, setOverlapPx] = useState(180);
+  const slotCount = posterSrc.length;
   const reduceMotion = useReducedMotion();
+  const t = reduceMotion ? { duration: 0 } : spring;
+  const cards = useRef<(HTMLDivElement | null)[]>([]);
+
+  useLayoutEffect(() => {
+    const el = cards.current[0];
+    if (!el) return;
+    const update = () => {
+      const w = el.getBoundingClientRect().width;
+      if (w > 0) setOverlapPx(w * OVERLAP_RATIO);
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const onMove = useCallback((e: React.PointerEvent) => {
+    setHovered((p) => hitTest(e.clientX, e.clientY, cards.current, p));
+  }, []);
 
   return (
     <div
@@ -41,41 +82,46 @@ export default function PosterSurf({ posterSrc, className }: PosterSurfProps) {
       data-name="poster-surf"
       role="group"
       aria-label="Poster mockups"
-      onMouseLeave={() => setHovered(null)}
+      onPointerLeave={() => setHovered(null)}
     >
-      {/* Row fills vertical space from parent; posters stretch to this height (2:3 width from height). */}
-      <div className="flex min-h-0 w-full flex-1 items-end justify-center overflow-visible px-1 py-2 [transform:translateZ(0)]">
+      <div
+        className="flex min-h-0 w-full flex-1 cursor-default items-end justify-center overflow-visible px-1 py-2 [transform:translateZ(0)]"
+        onPointerMove={onMove}
+      >
         <div className="flex h-full min-h-0 max-h-full items-end justify-center">
-          {Array.from({ length: POSTER_COUNT }, (_, i) => {
-            const isFocused = hovered === i;
-            const rotateY = isFocused ? 0 : REST_ROTATE_Y_DEG;
-            const scale = isFocused ? 1.14 : 1;
-            const z = isFocused ? 60 : 0;
-
+          {Array.from({ length: slotCount }, (_, i) => {
+            const f = hovered === i;
             return (
               <motion.div
                 key={i}
                 className="flex h-full min-h-0 shrink-0 items-end"
                 style={{
-                  perspective: `${LOCAL_PERSPECTIVE_PX}px`,
+                  perspective: `${PERSPECTIVE}px`,
                   perspectiveOrigin: '50% 50%',
-                  zIndex: isFocused ? 60 : 8 + (POSTER_COUNT - 1 - i),
+                  zIndex: slotCount - i,
                 }}
                 initial={false}
-                animate={{ marginLeft: overlapMarginLeft(i, hovered) }}
-                transition={reduceMotion ? { duration: 0 } : spring}
+                animate={{ marginLeft: marginLeft(i, hovered, overlapPx) }}
+                transition={t}
               >
                 <motion.div
-                  className="relative h-full max-h-full w-auto cursor-pointer overflow-hidden rounded-[2px] border border-black/25 bg-[#e8e8e8] shadow-[2px_4px_12px_rgba(0,0,0,0.12)]"
+                  ref={(el) => {
+                    cards.current[i] = el;
+                  }}
+                  className="relative h-full max-h-full w-auto cursor-pointer overflow-hidden rounded-[2px]"
                   style={{
                     aspectRatio: '2 / 3',
                     transformOrigin: 'center bottom',
                     transformStyle: 'preserve-3d',
                   }}
                   initial={false}
-                  animate={{ rotateY, scale, translateZ: z }}
-                  transition={reduceMotion ? { duration: 0 } : spring}
-                  onMouseEnter={() => setHovered(i)}
+                  animate={{
+                    rotateY: f ? 0 : REST_Y,
+                    scale: f ? 1.14 : 1,
+                    translateZ: f ? 60 : 0,
+                    boxShadow: '2px 2px 30px rgba(0,0,0,0.2)'
+                  }}
+                  transition={t}
                 >
                   {posterSrc?.[i] ? (
                     <img
@@ -85,10 +131,7 @@ export default function PosterSurf({ posterSrc, className }: PosterSurfProps) {
                       draggable={false}
                     />
                   ) : (
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute inset-[1px] bg-[#ececec]"
-                    />
+                    <div aria-hidden className="pointer-events-none absolute inset-[1px] bg-[#ececec]" />
                   )}
                 </motion.div>
               </motion.div>

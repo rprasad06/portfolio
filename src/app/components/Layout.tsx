@@ -14,13 +14,13 @@ export default function Layout() {
 
   return (
     <div className="relative flex min-h-dvh w-full flex-col items-start bg-white" data-name="layout">
-      <header className="sticky z-1 top-0 w-full bg-white">
+      <header className="sticky top-0 z-2 w-full bg-white">
         <Navbar />
       </header>
 
       {isHome ? (
         <div
-          className="absolute left-[269px] top-[-672px] z-2 flex h-[1413.346px] w-[1472.184px] items-center justify-center"
+          className="absolute left-[269px] top-[-672px] z-3 flex h-[1413.346px] w-[1472.184px] items-center justify-center"
           style={
             { '--transform-inner-width': '1200', '--transform-inner-height': '19' } as React.CSSProperties
           }
@@ -37,7 +37,7 @@ export default function Layout() {
         </div>
       ) : null}
 
-      <div className="relative flex w-full max-w-[1440px] flex-[1_0_0] items-start overflow-x-clip">
+      <div className="relative flex w-full max-w-[1440px] flex-[1_0_0] items-start overflow-x-visible">
         <Sidebar />
         <div className="min-w-0 flex-1">
           <Outlet />

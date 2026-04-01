@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router';
 function NameSection() {
   return (
     <div
-      className="flex h-[var(--viewport-height)] w-full min-w-0 max-w-[715px] shrink-0 flex-col items-start"
+      className="flex h-[var(--viewport-height)] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
       data-name="name section"
     >
       {/* Name Header */}

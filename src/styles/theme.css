@@ -17,6 +17,8 @@
   /* Dynamic viewport — tracks visible area as mobile browser chrome shows/hides */
   --viewport-height: 100vh;
   --viewport-height: 100dvh;
+  /* Main column width cap — half of viewport (replaces fixed ~715px) */
+  --half-viewport-width: 50vw;
   /* --unit: set on documentElement from measured [data-sidebar-spacer="above"] height (Sidebar.tsx) */
   --unit: 0px;
   /* Space under name block before bio (HomePage) — paired with --sidebar-content-pt */
