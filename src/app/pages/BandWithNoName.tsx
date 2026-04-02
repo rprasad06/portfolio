@@ -92,7 +92,7 @@ export default function BandWithNoNamePage() {
         <div className={`${BODY_OVERVIEW} min-h-0 flex-1 overflow-y-auto`} data-name="body">
           <p className="min-w-full shrink-0 leading-[17px]">
             In late spring 2022, I formed the Band with No Name with five high school friends. This
-            summer, we&apos;re headlining the annual Braintree Day—Braintree&apos;s biggest festival.
+            summer, we're headlining the annual Braintree Day—Braintree's biggest festival.
             We began playing live shows in the summer of 2023, and continue to play shows today,
             every summer and winter. Since then, we have earned over $50,000 from local bars,
             restaurants, festivals, and tips from listeners. Within the band, I am responsible for
@@ -194,7 +194,11 @@ export default function BandWithNoNamePage() {
                   some small changes to recent design and publication materials that kept the brand
                   fresh and set the tone for the summer. I designed this poster to have more
                   character than our 2024 season advertisements while maintaining a clear and readable
-                  show list. The inspiration comes from the photo, where the reds of the shed,
+                  show list. 
+                  
+                  <br />  <br />
+
+                  The inspiration comes from the photo, where the reds of the shed,
                   guitar, and flag stood out to me as an accent color — and I expanded on that in
                   the rest of the poster, while keeping our iconic navy blue in the foreground.
                 </p>
@@ -233,14 +237,14 @@ export default function BandWithNoNamePage() {
           <p className="min-w-full shrink-0 leading-[17px]">
             Having the opportunity to manage, conduct outreach, and design for a group and hobby
             that I am so passionate about is truly a privilege and motivates me to do all this
-            background work that creates a successful music group. Of course, I don&apos;t do all of
+            background work that creates a successful music group. Of course, I don't do all of
             this work completely alone — my dear bandmates all have their own roles with the
-            operations of the band, and I&apos;ve received much guidance from other people in the
+            operations of the band, and I've received much guidance from other people in the
             industry like musicians and booking agents that have been doing this a lot longer than I
-            have. The largest takeaways I&apos;ve had so far is learning how marketing works in a
-            hands-on environment with my own small business. I&apos;ve learned to stand my ground
+            have. The largest takeaways I've had so far is learning how marketing works in a
+            hands-on environment with my own small business. I've learned to stand my ground
             and fight for the shows that we want, the payments that we deserve, and the connections
-            that will push our career forward. For these reasons, I&apos;m so lucky to have a band
+            that will push our career forward. For these reasons, I'm so lucky to have a band
             that I can push my skills in business, design, and advertising to see real results for
             us as a group.
           </p>
