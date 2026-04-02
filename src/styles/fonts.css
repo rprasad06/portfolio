@@ -1,1 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;1,300&family=Xanh+Mono&display=swap");
+
+/**
+ * New Spirit (Medium Italic) — add your licensed file as:
+ *   public/fonts/new-spirit/NewSpirit-MediumItalic.woff2
+ * Or use an Adobe Fonts web project: @import your kit URL here instead of @font-face below.
+ */
+@font-face {
+  font-family: "New Spirit";
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/new-spirit/NewSpirit-MediumItalic.woff2") format("woff2");
+}

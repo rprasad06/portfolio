@@ -32,6 +32,7 @@
 
   --font-inter: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-xanh-mono: "Xanh Mono", ui-monospace, monospace;
+  --font-new-spirit: "New Spirit", ui-serif, Georgia, serif;
 
   --font-size: 16px;
   --background: #ffffff;
@@ -290,5 +291,15 @@
     font-weight: 400;
     font-size: 48px;
     line-height: normal;
+  }
+
+  /** Band with No Name — summer section (Figma: New Spirit Medium Italic) */
+  .type-new-spirit-summer {
+    font-family: var(--font-new-spirit);
+    font-weight: 500;
+    font-size: clamp(28px, 5vw, 36px);
+    font-style: italic;
+    letter-spacing: -0.05em;
+    line-height: 1.03;
   }
 }

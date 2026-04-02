@@ -3,6 +3,8 @@ import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import HroPage from './pages/HroPage';
 import NotFound from './pages/NotFound';
+import CrimsonPage from './pages/Crimson';
+import BandWithNoNamePage from './pages/BandWithNoName';
 
 export const router = createBrowserRouter([
   {
@@ -16,21 +18,11 @@ export const router = createBrowserRouter([
       // Placeholder routes for future project pages
       {
         path: 'harvard-crimson',
-        element: (
-          <div className="type-inter-14 p-16">
-            <h1 className="type-xanh-32 mb-4">The Harvard Crimson</h1>
-            <p>Project page coming soon...</p>
-          </div>
-        ),
+        Component: CrimsonPage,
       },
       {
         path: 'band-no-name',
-        element: (
-          <div className="type-inter-14 p-16">
-            <h1 className="type-xanh-32 mb-4">The Band with No Name</h1>
-            <p>Project page coming soon...</p>
-          </div>
-        ),
+        Component: BandWithNoNamePage,
       },
       {
         path: 'hro',
