@@ -183,8 +183,8 @@ export default function BandWithNoNamePage() {
         <div className="w-[calc(100dvw-var(--sidebar-width))]">
           <div className="h-[20dvh] bg-gradient-to-b from-white to-[#F9F9F9]"/>
           <div className="bg-[#F9F9F9]">
-            <div className="flex flex-col-reverse gap-32 pl-8 py-8 lg:flex-row lg:items-start lg:gap-8">
-              <div className="flex max-w-[315px] flex-col gap-8 lg:shrink-0">
+            <div className="flex h-full flex-col-reverse gap-32 pl-8 py-8 lg:flex-row lg:gap-8">
+              <div className="flex flex-1 max-w-[315px] flex-col justify-between">
                 <p className="type-new-spirit-summer mb-0 text-black">2025 Summer:</p>
                 <p className="type-new-spirit-summer mb-0 text-black">
                   A brand new, expanded design system.
