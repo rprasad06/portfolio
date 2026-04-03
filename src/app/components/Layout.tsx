@@ -3,6 +3,8 @@ import { Outlet, useLocation } from 'react-router';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import reticulatedOrange from './assets/reticulated_orange.png';
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -43,6 +45,7 @@ export default function Layout() {
           <Outlet />
         </div>
       </div>
+      <Analytics />
     </div>
   );
 }

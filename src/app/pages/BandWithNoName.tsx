@@ -122,7 +122,7 @@ export default function BandWithNoNamePage() {
           </p>
           <div className="flex w-full flex-col gap-4">
             <h3 className="type-xanh-26 mb-0 leading-[normal]">The Logo</h3>
-            <p className="mb-0 leading-[17px]">Simple. Reproducible. Iconic.</p>
+            <p className="mb-0 leading-[17px]">Simple. Reproducible. Recognizable.</p>
           </div>
           <div className="relative mt-[-4dvh] ml-[8dvw] flex h-[80dvh] min-h-[320px] w-[calc(100dvw)] min-w-0 shrink-0 flex-col">
             <div className="relative min-h-0 flex-1 h-full">
@@ -147,7 +147,7 @@ export default function BandWithNoNamePage() {
         <ProblemPhotoStack
           className="mb-10"
           items={[
-            { src: photoA, width: 467, height: 580, alt: '' },
+            { src: photoA, width: 400, height: 580, alt: '' },
             { src: photoB, width: 435, height: 540, alt: '' },
             { src: hatsUrl, width: 411, height: 511, alt: '' },
           ]}
