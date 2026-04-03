@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect } from 'react';
 import { useLocation } from 'react-router';
 import { cn } from '@/components/ui/utils';
 import { BandBusinessCard } from '../components/BandBusinessCard';
+import { ProblemPhotoStack } from '../components/ProblemPhotoStack';
 import hatsUrl from '../components/assets/tbwnn/hats.jpg';
 import photoA from '../components/assets/tbwnn/photo-a.png';
 import photoB from '../components/assets/tbwnn/photo-b.png';
@@ -142,37 +143,15 @@ export default function BandWithNoNamePage() {
             </div>
           </div>
         </div>
-      
 
-      
-      
-
-        <div className="relative mb-10 min-h-[min(880px,120dvh)] w-full max-w-[715px] overflow-y-visible">
-          <img
-            src={photoA}
-            alt=""
-            width={467}
-            height={580}
-            draggable={false}
-            className="absolute right-0 top-8 z-0 w-[min(467px,85vw)] max-w-[467px] rotate-[-7deg] shadow-[0_0_16px_rgba(0,0,0,0.5)]"
-          />
-          <img
-            src={photoB}
-            alt=""
-            width={435}
-            height={540}
-            draggable={false}
-            className="absolute left-[-12%] top-0 z-[1] w-[min(434px,78vw)] max-w-[434px] rotate-[4deg] shadow-[0_0_12px_rgba(0,0,0,0.5)] sm:left-[-8%]"
-          />
-          <img
-            src={hatsUrl}
-            alt=""
-            width={411}
-            height={511}
-            draggable={false}
-            className="absolute bottom-0 left-[2%] z-[2] w-[min(411px,82vw)] max-w-[411px] rotate-[-6deg] shadow-[0_0_16px_rgba(0,0,0,0.5)]"
-          />
-        </div>
+        <ProblemPhotoStack
+          className="mb-10"
+          items={[
+            { src: photoA, width: 467, height: 580, alt: '' },
+            { src: photoB, width: 435, height: 540, alt: '' },
+            { src: hatsUrl, width: 411, height: 511, alt: '' },
+          ]}
+        />
 
       </section>
       <section
