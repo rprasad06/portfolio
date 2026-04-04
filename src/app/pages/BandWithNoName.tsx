@@ -188,7 +188,7 @@ export default function BandWithNoNamePage() {
                   <SwatchRow hex="#EAE0D5" label="#EAE0D5" />
                 </div>
               </div>
-              <div className="min-h-[400px] min-w-0 flex-1 lg:min-h-[min(926px,85dvh)]">
+              <div className="min-h-[400px] min-w-0 flex-1 lg:min-h-[min(926px,85dvh)] max-w-[50dvw]">
                 <img
                   src={summerSchedule}
                   alt="2025 summer show schedule poster"
