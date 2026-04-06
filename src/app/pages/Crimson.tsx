@@ -8,6 +8,9 @@ import redMockup from '../components/assets/crimson_assets/redmockup.png';
 import fullHomepageMockup from '../components/assets/crimson_assets/full homepage mockup.png';
 import homepageMobileMockup from '../components/assets/crimson_assets/homepage_mobile.png';
 import mobileWriterPageFeedback from '../components/assets/crimson_assets/mobile writer page feedback.png';
+import contentDesktop from '../components/assets/crimson_assets/content-desktop.png';
+import contentMobile from '../components/assets/crimson_assets/content-mobile.png';
+import writerDesktop from '../components/assets/crimson_assets/writer-desktop.png';
 
 /** Matches ProjectCard title row on HomePage. */
 const TITLE_BAND =
@@ -65,12 +68,12 @@ const PAGE_TAB_PREVIEWS: Record<PageTabId, { desktop: string; mobile: string }> 
     mobile: homepageMobileMockup,
   },
   writer: {
-    desktop: desktopMockup,
+    desktop: writerDesktop,
     mobile: mobileWriterPageFeedback,
   },
   news: {
-    desktop: redMockup,
-    mobile: homepageMobileMockup,
+    desktop: contentDesktop,
+    mobile: contentMobile,
   },
 };
 

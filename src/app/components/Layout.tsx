@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 import reticulatedOrange from './assets/reticulated_orange.png';
 import { Analytics } from '@vercel/analytics/react';
+import Footer from './Footer';
 
 
 export default function Layout() {
@@ -22,13 +23,13 @@ export default function Layout() {
 
       {isHome ? (
         <div
-          className="absolute left-[269px] top-[-672px] z-3 flex h-[1413.346px] w-[1472.184px] items-center justify-center"
+          className="pointer-events-none absolute left-[269px] top-[-672px] z-3 flex h-[1413.346px] w-[1472.184px] items-center justify-center"
           style={
             { '--transform-inner-width': '1200', '--transform-inner-height': '19' } as React.CSSProperties
           }
         >
-          <div className="flex-none rotate-[-141.59deg]">
-            <div className="relative h-[845.709px] w-[1208.24px]" data-name="Asset 2@4x 1">
+          <div className="pointer-events-none flex-none rotate-[-141.59deg]">
+            <div className="pointer-events-none relative h-[845.709px] w-[1208.24px]" data-name="Asset 2@4x 1">
               <img
                 alt=""
                 className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
@@ -45,6 +46,7 @@ export default function Layout() {
           <Outlet />
         </div>
       </div>
+      <Footer />
       <Analytics />
     </div>
   );

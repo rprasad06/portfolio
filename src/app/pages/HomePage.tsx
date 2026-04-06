@@ -4,7 +4,8 @@ import { Link, useLocation } from 'react-router';
 function NameSection() {
   return (
     <div
-      className="flex h-[var(--viewport-height)] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
+      id="about"
+      className="flex h-[var(--viewport-height)] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 scroll-mt-[var(--nav-height)] flex-col items-start"
       data-name="name section"
     >
       {/* Name Header */}
@@ -148,7 +149,11 @@ const projects = [
 ] as const;
 
 /** Sidebar WORK links — same order and labels as project sections on the home page. */
-export const workNavItems = projects.map((p) => ({ id: p.id, name: p.title }));
+export const workNavItems = projects.map((p) => ({
+  id: p.id,
+  name: p.title,
+  path: p.path,
+}));
 
 export default function HomePage() {
   const location = useLocation();
