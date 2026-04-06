@@ -23,16 +23,13 @@ function NameSection() {
       <div className="relative min-h-px min-w-px w-full flex-[1_0_0]">
         <div className="flex size-full flex-col gap-[22px] items-start">
           <div className="min-w-full w-[min-content] shrink-0 leading-[0]">
-            <p className="type-inter-14 mb-[10px] leading-[normal]">
-              I'm a designer who loves making things look and feel good.
-            </p>
-            <p className="type-inter-14 mb-[10px]">
-              I believe in revealing{" "}
-              <span className="type-inter-14-italic">identity</span>
-              {" "}in what I design,
-            </p>
-            <p className="type-inter-14">
-              weaving metaphors into elements that imply the things that are important.
+            <p className="type-inter-14 mb-[10px] leading-[2]">
+            I’m a UX designer and front-end engineer with experience in
+            <br /> graphic design and 
+            data visualization.
+            I try to solve problems through design, 
+            <br /> 
+            while creating designs that are memorable and rich.
             </p>
           </div>
 
