@@ -10,5 +10,20 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      window.addEventListener('load', () => {
+
+        const savedReferrer = sessionStorage.getItem('original_page_a');
+
+        if (savedReferrer && window.va) {
+
+          window.va('event', { 
+            name: 'referrer_capture', 
+            data: { from_page_a: savedReferrer } 
+          });
+          sessionStorage.removeItem('original_page_a');
+        }
+      });
+    </script>
   </body>
 </html>
