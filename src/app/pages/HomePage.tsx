@@ -24,10 +24,9 @@ function NameSection() {
         <div className="flex size-full flex-col gap-[22px] items-start">
           <div className="min-w-full w-[min-content] shrink-0 leading-[0]">
             <p className="type-inter-14 mb-[10px] leading-[2]">
-            I’m a UX designer and front-end engineer with experience in
-            <br /> graphic design and 
-            data visualization.
-            I try to solve problems through design, 
+            I’m a UX designer and front-end engineer with experience in graphic design and 
+            data visualization.   <br />  
+             I try to solve problems through design, 
             <br /> 
             while creating designs that are memorable and rich.
             </p>

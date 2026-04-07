@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { workNavItems } from '../pages/HomePage';
+import reticulatedOrange from './assets/reticulated_orange.png';
 
 const EMAIL = 'rahulprasad@college.harvard.edu';
 const PHONE_DISPLAY = '781-428-4276';
@@ -28,17 +29,59 @@ export default function Footer() {
   return (
     <footer
       id="contact"
-      className="type-inter-14 mt-auto flex w-full shrink-0 flex-col gap-10 py-16 scroll-mt-20"
+      className="type-inter-14 relative mt-auto flex w-full shrink-0 flex-col gap-10 overflow-hidden py-16 scroll-mt-20"
       data-name="contact"
     >
-     
-      <svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1 0.0001">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-[-20rem] rotate-340 top-0 z-0 overflow-hidden"
+      >
+        <img
+          alt=""
+          src={reticulatedOrange}
+          className="absolute right-0 bottom-0 w-[50dvw] object-contain object-right-bottom select-none"
+          decoding="async"
+        />
+      </div>
+
+      <svg className="relative z-10 block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 1 0.0001">
         <line stroke="var(--stroke-0, black)" x1="0" y1="0" x2="1" y2="0" />
       </svg>
-    
 
-      <div className="flex min-w-0 flex-col sm:gap-8 md:gap-0 md:flex-row py-8 pl-4">
-        <div className="flex min-w-0 flex-col gap-4 w-[calc(var(--sidebar-width)-16px)]">
+      <div className="relative z-10 flex min-w-0 flex-col sm:gap-8 md:gap-0 md:flex-row py-8 pl-4">
+        
+
+        <div className="flex min-w-0 flex-col gap-6 w-[calc(var(--sidebar-width)-16px)]">
+          <nav aria-label="Page" className="flex flex-col gap-2">
+            <p className="type-inter-10-caps leading-[normal]">Page</p>
+            <ul className="flex flex-col gap-2 leading-[normal]">
+              <li>
+                <Link className={linkClass} to="/" onClick={handleHomeClick}>
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link className={linkClass} to="/#about">
+                  About
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          <nav aria-label="Projects" className="flex flex-col gap-2">
+            <p className="type-inter-10-caps leading-[normal]">Projects</p>
+            <ul className="flex flex-col gap-2 leading-[normal]">
+              {workNavItems.map(({ id, name, path }) => (
+                <li key={id}>
+                  <Link className={linkClass} to={path}>
+                    {name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col gap-4">
           <div className="type-xanh-26 leading-[0]">
             <p className="mb-0 leading-[normal]">Rahul</p>
             <p className="leading-[normal]">Prasad</p>
@@ -80,36 +123,6 @@ export default function Footer() {
               </a>
             </li>
           </ul>
-        </div>
-
-        <div className="flex min-w-0 flex-1 flex-col gap-6">
-          <nav aria-label="Page" className="flex flex-col gap-2">
-            <p className="type-inter-10-caps leading-[normal]">Page</p>
-            <ul className="flex flex-col gap-2 leading-[normal]">
-              <li>
-                <Link className={linkClass} to="/" onClick={handleHomeClick}>
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link className={linkClass} to="/#about">
-                  About
-                </Link>
-              </li>
-            </ul>
-          </nav>
-          <nav aria-label="Projects" className="flex flex-col gap-2">
-            <p className="type-inter-10-caps leading-[normal]">Projects</p>
-            <ul className="flex flex-col gap-2 leading-[normal]">
-              {workNavItems.map(({ id, name, path }) => (
-                <li key={id}>
-                  <Link className={linkClass} to={path}>
-                    {name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </div>
     </footer>
