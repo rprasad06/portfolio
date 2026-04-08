@@ -53,10 +53,13 @@ function NameSection() {
             className="flex w-full shrink-0 flex-col items-start pt-[64px]"
             data-name="left"
           >
-            <p className="type-xanh-20 shrink-0 whitespace-nowrap text-center leading-[0]">
+            <Link
+              to="/about"
+              className="type-xanh-20 shrink-0 whitespace-nowrap text-center leading-[0] text-inherit no-underline"
+            >
               <span className="underline decoration-solid">about me</span>
               <span className="leading-[normal]"> →</span>
-            </p>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { workNavItems } from '../pages/HomePage';
+import resumePdf from './assets/Rahul_Prasad_Resume_Design.pdf';
 import reticulatedOrange from './assets/reticulated_orange.png';
 
 const EMAIL = 'rahulprasad@college.harvard.edu';
@@ -9,8 +10,6 @@ const PHONE_TEL = 'tel:+17814284276';
 const LINKEDIN_HREF = 'https://www.linkedin.com/in/rahul-prasad-218b57234/';
 const TWITTER_HREF = 'https://x.com/rhpsd06';
 const GITHUB_HREF = 'https://github.com/rprasad06';
-const RESUME_HREF = '/resume.pdf';
-
 const linkClass = 'text-inherit underline decoration-solid underline-offset-2';
 
 export default function Footer() {
@@ -61,7 +60,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link className={linkClass} to="/#about">
+                <Link className={linkClass} to="/about">
                   About
                 </Link>
               </li>
@@ -118,7 +117,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a className={linkClass} href={RESUME_HREF} rel="noopener noreferrer" target="_blank">
+              <a className={linkClass} href={resumePdf} rel="noopener noreferrer" target="_blank">
                 Resume
               </a>
             </li>

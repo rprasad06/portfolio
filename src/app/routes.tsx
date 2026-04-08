@@ -5,6 +5,7 @@ import HroPage from './pages/HroPage';
 import NotFound from './pages/NotFound';
 import CrimsonPage from './pages/Crimson';
 import BandWithNoNamePage from './pages/BandWithNoName';
+import AboutPage from './pages/About';
 
 export const router = createBrowserRouter([
   {
@@ -14,6 +15,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path: 'about',
+        Component: AboutPage,
       },
       // Placeholder routes for future project pages
       {
