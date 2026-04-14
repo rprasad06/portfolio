@@ -62,7 +62,7 @@ export default function AboutPage() {
 
         {/* Right: heading + bassoon text */}
         <div className="flex flex-col justify-center py-16 pl-12 pr-4">
-          <h2 className="type-xanh-32 mb-6">I love the bassoon.</h2>
+          <h2 className="type-xanh-26 mb-6">I love the bassoon.</h2>
           <div className="type-inter-14 flex flex-col gap-3 leading-[1.5]">
             <p>
               is what any bassoonist you meet might say, because we bassoonists tend
@@ -89,7 +89,7 @@ export default function AboutPage() {
 
         {/* Left: heading + boats text */}
         <div className="flex flex-col justify-center py-16 pr-12">
-          <h2 className="type-xanh-32 mb-6">I spend a lot of time on boats</h2>
+          <h2 className="type-xanh-26 mb-6">I spend a lot of time on boats</h2>
           <div className="type-inter-14 flex flex-col gap-3 leading-[1.5]">
             <p>Dragon boats, specifically. And outrigger canoes sometimes.</p>
             <p>
