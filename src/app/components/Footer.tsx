@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router';
 import { workNavItems } from '../pages/HomePage';
-import resumePdf from './assets/Rahul_Prasad_Resume_Design.pdf';
+import resumePdf from './assets/Resume_Oct_2026.pdf';
 import reticulatedOrange from './assets/reticulated_orange.png';
 
 const EMAIL = 'rahulprasad@college.harvard.edu';
