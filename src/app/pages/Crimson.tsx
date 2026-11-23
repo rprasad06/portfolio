@@ -255,9 +255,10 @@ export default function CrimsonPage() {
       </div>
 
       <div
-        className="flex h-[var(--unit)] pt-[60px] max-h-[100dvh] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
+        className="flex h-[var(--unit)] gap-2 pt-[60px] max-h-[100dvh] w-full min-w-0 max-w-[var(--half-viewport-width)] shrink-0 flex-col items-start"
         data-name="name section"
       >
+        <a className="type-inter-12 underline" href="https://www.thecrimson.com">www.thecrimson.com</a>
         <div className="flex w-full shrink-0 items-end pb-4">
           <div className="type-xanh-26 min-w-0 shrink-0 leading-[0]">
             <p className="mb-0 leading-[normal]">The Harvard Crimson</p>
@@ -288,15 +289,15 @@ export default function CrimsonPage() {
         <div className={`${BODY_OVERVIEW} min-h-0 flex-1 overflow-y-auto`} data-name="body">
           <div className="min-w-full w-[min-content] shrink-0 leading-[normal]">
             <p className="mb-0">
-              The Harvard Crimson is Harvard&apos;s premier student newspaper, with a weekly
+              The Harvard Crimson is Harvard's premier student newspaper, with a weekly
               published paper in print and digital news site at thecrimson.com. The website
               receives over a million views a month.
             </p>
             <p className="mb-0">&nbsp;</p>
             <p>
-              The Crimson began its new website redesign project last January, aiming to rework the
-              inaccessible UI, dated aesthetic, and style inconsistencies. Working with my digital
-              design co-executive as well as the Crimson&apos;s president, technology board,
+              The Crimson began its new website redesign project in January 2024, aiming to rework the
+              inaccessible UI, dated aesthetic, and style inconsistencies between mobile and web. Working with my digital
+              design co-executive as well as the Crimson's president, technology board,
               digital strategist, and the Crimson board, we embarked on this project to re-vitalize
               the Crimson&apos;s web and mobile experience.
             </p>
@@ -428,8 +429,8 @@ export default function CrimsonPage() {
         <div className={`${BODY_STACK} min-h-0 flex-1 overflow-y-auto`} data-name="body">
           <div className="min-w-full shrink-0 leading-[normal]">
             <p className="mb-0">
-              This project has been handed off to the next group of designers that we trained for
-              this role at the Crimson. The project is aimed to launch by summer 2026.
+              This project was handed off to the next group of designers that we trained for the
+              role in January 2026. As of September 2026, the redesign is live at <a className="underline" href="https://www.thecrimson.com/"> www.thecrimson.com</a>.
             </p>
             <p className="mb-0">&nbsp;</p>
             <p className="mb-0">We also learned the following:</p>

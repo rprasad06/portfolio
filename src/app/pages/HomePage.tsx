@@ -28,7 +28,7 @@ function NameSection() {
             data visualization.   <br />  
              I try to solve problems through design, 
             <br /> 
-            while creating designs that are memorable and rich.
+            while creating interactions that are memorable and rich.
             </p>
           </div>
 
